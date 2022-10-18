@@ -1,5 +1,6 @@
 ﻿using BookApi.Helpers;
 using BookApi.Models;
+using BookApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -36,7 +37,7 @@ namespace BookApi.Repository
                return listOfBooks.FirstOrDefault(x => x.Price == priceValue);
         }
 
-        public async Task<IEnumerable<Book?>> GetAuthor(string author)
+        public async Task<IEnumerable<Book>> GetAuthor(string author)
         {
             var listOfBooks = await _streamReaderData.LoadData();
 
@@ -48,7 +49,44 @@ namespace BookApi.Repository
             var listOfBooks = await _streamReaderData.LoadData();
 
             return listOfBooks.Where(x => x.Price > priceOne).Where(y => y.Price < priceTwo);
+        }
 
+        public async Task<IEnumerable<Book>> GetPublished(int? year, int? month, int? day)
+        {
+            var listOfBooks = await _streamReaderData.LoadData();
+
+            if (year != null && month != null && day != null)
+            {
+                return listOfBooks.Where(x => x.Publish_date.Year == year)
+                    .Where(x => x.Publish_date.Month == month)
+                    .Where(x => x.Publish_date.Day == day);
+            }
+            else if (year != null && month != null)
+            {
+                return listOfBooks.Where(x => x.Publish_date.Year == year)
+                    .Where(x => x.Publish_date.Month == month);
+            }
+            else if (year != null)
+            {
+                return listOfBooks.Where(x => x.Publish_date.Year == year);
+            }
+            else if (month != null && day != null)
+            {
+                return listOfBooks.Where(x => x.Publish_date.Month == month)
+                    .Where(x => x.Publish_date.Day == day);
+            }
+            else if (month != null)
+            {
+                return listOfBooks.Where(x => x.Publish_date.Month == month);
+            }
+            else if (day != null)
+            {
+                 return listOfBooks.Where(x => x.Publish_date.Day == day);
+            }
+            else
+            {
+                return listOfBooks;
+            }
         }
     }
 }

@@ -33,9 +33,22 @@ namespace BookApi.Services
         {
             return await _bookRepository.GetAuthor(author);
         }
+
         public async Task<IEnumerable<Book>> GetPriceRange(decimal priceOne, decimal priceTwo)
         {
+            if (true)
+            {
+
+            }
+
             return await _bookRepository.GetPriceRange(priceOne, priceTwo);  
+
+
+        }
+
+        public async Task<IEnumerable<Book?>> GetPublished(int? year, int? month, int? day)
+        {
+            return await _bookRepository.GetPublished(year, month, day);
         }
     }
 }

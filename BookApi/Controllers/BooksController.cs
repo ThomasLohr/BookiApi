@@ -55,9 +55,9 @@ namespace BookApi.Controllers
         }
 
         [HttpGet("published")]
-        public async Task<ActionResult<IEnumerable<Book>>> GetPublished([FromQuery] DateTime published)
+        public async Task<ActionResult<IEnumerable<Book>>> GetPublished([FromQuery] int? year, int? month, int? day)
         {
-            var getPublished = await _bookService.GetPublished(published);
+            var getPublished = await _bookService.GetPublished(year, month, day);
             return Ok(getPublished);
         }
 
