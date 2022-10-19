@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookApi.Services
 {
+
+    //Service class
     public class BookService
     {
         private readonly BookRepository _bookRepository;
@@ -24,7 +26,7 @@ namespace BookApi.Services
             return await _bookRepository.FindBookById(id);
         }
 
-        public async Task<IEnumerable<Book?>> GetAuthor(string author)
+        public async Task<IEnumerable<Book>> GetAuthor(string author)
         {
             return await _bookRepository.GetAuthor(author);
         }

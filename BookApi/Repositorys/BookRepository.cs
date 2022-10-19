@@ -6,20 +6,17 @@ using System.Linq;
 
 namespace BookApi.Repository
 {
+
+    //Repository
     public class BookRepository
     {
         private readonly StreamReaderData _streamReaderData;
-        private IEnumerable<Book>? _books;
-
+        
         public BookRepository(StreamReaderData streamReaderData)
         {
             _streamReaderData = streamReaderData;
         }
-        public async Task Init()
-        {
-            _books = await _streamReaderData.LoadData();
-        }
-
+      
         public async Task<IEnumerable<Book>> GetAllBooks()
         {
             return await _streamReaderData.LoadData(); 

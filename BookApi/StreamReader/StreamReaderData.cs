@@ -4,6 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace BookApi.Helpers
 {
+
+    // StreamReaderData is a class to keep the code a bit seperated from the rest so it's easier to read/handle
+    
     public class StreamReaderData
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -12,6 +15,8 @@ namespace BookApi.Helpers
         {
             _webHostEnvironment = webHostEnvironment;
         }
+
+        //LoadData method loads the data into C# code so it can be used further down the line
 
         public async Task<IEnumerable<Book>> LoadData()
         {
@@ -34,6 +39,9 @@ namespace BookApi.Helpers
             }
             return books;
         }
+
+
+        //SaveBook method a book and addds a new book to the json file
 
         public async void SaveBook(Book book)
         {

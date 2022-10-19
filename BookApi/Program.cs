@@ -18,7 +18,6 @@ builder.Services.AddSingleton<StreamReaderData>();
 
 var app = builder.Build();
 
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

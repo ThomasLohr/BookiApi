@@ -18,15 +18,15 @@ namespace BookApi.Controllers
         {
             _bookService = bookService;
         }
-
-        // GET: api/<BookController>
+        
+        //Gets all the books
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Book>>> GetAllBooks()
         {
             var listofBooks = await _bookService.GetAllBooks();
             return Ok(listofBooks);
         }
-
+        
         [HttpGet("id/{id}")]
         public async Task<ActionResult<Book?>> FindBookById(string? id)
         {
