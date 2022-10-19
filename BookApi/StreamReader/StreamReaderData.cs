@@ -34,5 +34,31 @@ namespace BookApi.Helpers
             }
             return books;
         }
+
+        public async void SaveBook(Book book)
+        {
+            var books = await LoadData();
+
+            var listOfBooks = books.ToList();
+
+            listOfBooks.Add(book);
+
+            var path = $"{_webHostEnvironment.ContentRootPath}/Json/books.json";
+
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                var options = new JsonSerializerOptions
+                { 
+                    WriteIndented = true
+                };
+
+                string? jsonString = JsonSerializer.Serialize(listOfBooks, options);
+
+                if (!string.IsNullOrEmpty(jsonString))
+                {
+                    await writer.WriteAsync(jsonString);
+                }
+            }
+        }
     }
 }
