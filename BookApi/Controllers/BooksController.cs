@@ -21,9 +21,9 @@ namespace BookApi.Controllers
         
         //Gets all the books
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> GetAllBooks()
+        public ActionResult<IEnumerable<Book>> GetAllBooks()
         {
-            var listofBooks = await _bookService.GetAllBooks();
+            var listofBooks =  _bookService.GetAllBooks();
             return Ok(listofBooks);
         }
         

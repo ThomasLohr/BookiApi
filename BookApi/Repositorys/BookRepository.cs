@@ -8,18 +8,20 @@ namespace BookApi.Repository
 {
 
     //Repository
-    public class BookRepository
+    public class BookRepository : IBookRepository
     {
         private readonly StreamReaderData _streamReaderData;
+        private readonly IEnumerable<Book> _books;
         
-        public BookRepository(StreamReaderData streamReaderData)
+        public BookRepository(StreamReaderData streamReaderData, IEnumerable<Book> books)
         {
             _streamReaderData = streamReaderData;
+            _books = Task.Run(() => _streamReaderData.LoadData()).Result;
         }
       
-        public async Task<IEnumerable<Book>> GetAllBooks()
+        public IEnumerable<Book> GetAllBooks()
         {
-            return await _streamReaderData.LoadData(); 
+            return _books;
         }
         public async Task<Book?> FindBookById(string? id)
         {

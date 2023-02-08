@@ -10,10 +10,14 @@ namespace BookApi.Helpers
     public class StreamReaderData
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly string _books;
+        
 
-        public StreamReaderData(IWebHostEnvironment webHostEnvironment)
+        public StreamReaderData(IWebHostEnvironment webHostEnvironment, string books)
         {
             _webHostEnvironment = webHostEnvironment;
+            _books = books;
+            
         }
 
         //LoadData method loads the data into C# code so it can be used further down the line
@@ -22,7 +26,7 @@ namespace BookApi.Helpers
         {
             List<Book> books = new List<Book>();
 
-            using (StreamReader reader = new StreamReader($"{_webHostEnvironment.ContentRootPath}/Json/books.json"))
+            using (StreamReader reader = new StreamReader($"{_webHostEnvironment.ContentRootPath}{ _books }"))
             {
                 var options = new JsonSerializerOptions() 
                 {

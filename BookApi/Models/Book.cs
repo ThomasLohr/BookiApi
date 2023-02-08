@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace BookApi.Models
 {
 	public class Book
-    {
+	{
 
 		public string? Id { get; set; }
 
@@ -20,6 +20,7 @@ namespace BookApi.Models
 		public DateTime Publish_date { get; set; }
 
 		public string? Description { get; set; }
-        
-    }
+
+	}
+
 }

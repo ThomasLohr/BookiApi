@@ -13,8 +13,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<BookService>();
-builder.Services.AddSingleton<BookRepository>();
-builder.Services.AddSingleton<StreamReaderData>();
+builder.Services.AddSingleton<IBookRepository, BookRepository>();
+builder.Services.AddSingleton<StreamReaderData>(s => new StreamReaderData(s.GetService<IWebHostEnvironment>(), "Json/books.json"));
+
 
 var app = builder.Build();
 
